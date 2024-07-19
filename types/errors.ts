@@ -1,0 +1,5 @@
+
+export enum ERROR_TYPES {
+    DUBLICATE_EMAIL,
+    DUBLICATE_USERNAME
+}

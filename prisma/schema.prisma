@@ -14,21 +14,20 @@ datasource db {
 }
 
 model User {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  username String   @unique
-  email    String   @unique
-  password String?
-  role     String   @default("user")
-  bio      String?
-  createAt DateTime @default(now())
-  updateAt DateTime @updatedAt
-  Posts    Post[]
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  username       String   @unique
+  email          String   @unique
+  password       String?
+  role           String   @default("user")
+  avatar         String?
+  authProvider   AUTH_PROVIDER 
+  authProviderId String 
+  createAt       DateTime @default(now())
+  updateAt       DateTime @updatedAt
 }
 
-model Post {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  description String
-  authorId    String @db.ObjectId
-  author      User   @relation(fields: [authorId], references: [id])
+enum AUTH_PROVIDER {
+  LOCAL
+  GITHUB
+  GOOGLE
 }
