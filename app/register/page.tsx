@@ -7,7 +7,7 @@ import Input from "@/components/auth/Input";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { registerUser } from "@/app/actions";
+import { loginWithGithub, loginWithGoogle, registerUser } from "@/app/actions";
 import toast from "react-hot-toast"
 import { ERROR_TYPES } from "@/types/errors";
 import { useRouter } from "next/navigation";
@@ -89,14 +89,26 @@ const RegisterPage = () => {
             </div>
 
             <div className="flex gap-4 w-full px-5 mt-3 text-black flex-col">
-                <button className="bg-[#181818] text-white rounded-full flex justify-center items-center gap-2 py-2">
-                    <FaGithub size={35} height={35} />
-                    <span className="text-base font-medium">Sign in with Github</span>
-                </button>
-                <button className="bg-white rounded-full flex justify-center items-center gap-2 py-2">
-                    <FcGoogle height={35} size={35} />
-                    <span className="text-base font-semibold">Sign in with Google</span>
-                </button>
+
+                <form action={async () => {
+                    await loginWithGithub()
+                }} className="w-full">
+                    <button className="bg-[#181818] text-white rounded-full flex justify-center items-center gap-2 py-2 w-full">
+                        <FaGithub size={35} height={35} />
+                        <span className="text-base font-medium">Sign In with Github</span>
+                    </button>
+                </form>
+
+
+                <form action={async () => {
+                    await loginWithGoogle()
+                }} className="w-full">
+                    <button className="bg-white rounded-full flex justify-center items-center gap-2 py-2 w-full">
+                        <FcGoogle height={35} size={35} />
+                        <span className="text-base font-semibold">Sign In with Google</span>
+                    </button>
+                </form>
+
             </div>
 
 

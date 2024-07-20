@@ -1,29 +1,29 @@
 import NextAuth from "next-auth"
-import Credentials from "next-auth/providers/credentials"
-import prisma from "@/prisma/client";
 import bcrypt from "bcryptjs"
+import prisma from "@/prisma/client"
+import Credentials from "next-auth/providers/credentials"
+import GoogleProvider from "next-auth/providers/google"
+import GithubProvider from "next-auth/providers/github"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
-      name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        email: {},
+        password: {},
       },
       authorize: async (credentials) => {
+        let user = null
         const email = credentials.email as string | undefined;
         const password = credentials.password as string | undefined;
 
-        if (!email || !password) {
-          throw new Error("Please provider all informations");
-        }
+        if (!email || !password) throw new Error("Invalid Credentials")
 
-        const user = await prisma.user.findUnique({
+        user = await prisma.user.findUnique({
           where: {
             email
           }
-        })
+        });
 
         if (!user) throw new Error("Invalid email or password");
 
@@ -31,8 +31,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         if (!isMatched) throw new Error("Invalid email or password");
 
-        return user;
-      }
-    })
+        return user
+      },
+    }),
+    GoogleProvider,
+    GithubProvider
   ],
+  session: { strategy: "jwt" },
+  pages: {
+    signIn: "/login"
+  }
 })

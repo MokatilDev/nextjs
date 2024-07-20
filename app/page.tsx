@@ -1,6 +1,17 @@
+import { auth } from "@/auth"
 import Link from "next/link"
 
-const Home = () => {
+const Home = async() => {
+
+  const session = await auth();
+
+  console.log(session)
+
+  if(session){
+    return <h1 className="text-xl font-bold">Welcome {session.user?.name}</h1>
+  }
+
+  
 
   return (
     <main className="flex min-h-screen justify-center items-center flex-col">
