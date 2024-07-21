@@ -11,6 +11,12 @@ import { loginWithGithub, loginWithGoogle, registerUser } from "@/app/actions";
 import toast from "react-hot-toast"
 import { ERROR_TYPES } from "@/types/errors";
 import { useRouter } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Register",
+    description: "Register page",
+};
 
 const RegisterPage = () => {
     const router = useRouter();

@@ -10,7 +10,13 @@ import { FcGoogle } from "react-icons/fc";
 import { loginUser, loginWithGithub, loginWithGoogle } from "../actions";
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation";
-import { auth } from "@/auth";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "Login",
+  description: "Login page",
+};
 
 const RegisterPage = () => {
   const router = useRouter()
