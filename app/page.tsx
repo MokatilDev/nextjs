@@ -28,7 +28,7 @@ const Home = async() => {
             Login
           </button>
         </Link>
-        <Link href={"/login"}>
+        <Link href={"/register"}>
           <button className="bg-white text-black rounded py-2 px-5 mt-5 text-lg font-semibold w-full">
             Register
           </button>

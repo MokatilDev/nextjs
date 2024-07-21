@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className + " flex flex-col justify-center items-center min-h-screen"}>
+      <body className={inter.className + " flex flex-col justify-center items-center min-h-screen py-5 px-4"}>
         <Toaster toastOptions={{ position: "top-right" }} />
         <SessionProvider>
           {children}
