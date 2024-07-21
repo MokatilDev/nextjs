@@ -67,6 +67,27 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           }
         }
 
+        if (account?.provider == "github") {
+
+          const existingUser = await prisma.user.findUnique({
+            where: {
+              email: user.email as string
+            }
+          })
+
+          if (!existingUser) {
+            await prisma.user.create({
+              data: {
+                email: user.email as string,
+                username: user.name as string,
+                avatar: user.image as string,
+                authProvider: AUTH_PROVIDER.GITHUB,
+                authProviderId: user.id as string
+              }
+            });
+          }
+        }
+
         token.email = user.email as string;
         token.username = user.name as string;
         token.avatar = user.image as string;
