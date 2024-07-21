@@ -64,7 +64,7 @@ const RegisterPage = () => {
                 <p className="text-gray-200 mt-1">Please provide all the necessary information</p>
             </div>
 
-            <form className="flex flex-col justify-center max-w-[400px] w-full" onSubmit={handleSubmit(onSubmit)}>
+            <form className="flex flex-col justify-center max-w-[400px] w-full" onSubmit={handleSubmit(onSubmit)} noValidate>
                 <Input id="email" type="email" placeholder="Enter your email address" label="Email" register={register("email")} error={errors.email?.message} />
                 {errors.email && <p className="text-red-500 text-sm mt-2">{errors.email.message}</p>}
 
