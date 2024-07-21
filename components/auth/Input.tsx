@@ -20,6 +20,7 @@ const Input = ({ type, id, placeholder, register, label, error }: InputProps) =>
             <label htmlFor={id} className="text-base mt-3 mb-2">{label}</label>
             <input
                 {...register}
+                required
                 type={type} id={id} placeholder={placeholder}
                 className={`${baseClasses} ${errorClasses}`}
             />

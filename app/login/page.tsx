@@ -53,11 +53,11 @@ const RegisterPage = () => {
         <p className="text-gray-200 mt-1">Please provide all the necessary information</p>
       </div>
 
-      <form className="flex flex-col justify-center max-w-[400px] w-full" onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex flex-col justify-center max-w-[400px] w-full" onSubmit={handleSubmit(onSubmit)} noValidate>
         <Input id="email" type="email" placeholder="Enter your email address" label="Email" register={register("email")} error={errors.email?.message} />
         {errors.email && <p className="text-red-500 text-sm mt-2">{errors.email.message}</p>}
 
-        <Input id="password" type="text" placeholder="Enter your password" label="Password" register={register("password")} error={errors.password?.message} />
+        <Input id="password" type="password" placeholder="Enter your password" label="Password" register={register("password")} error={errors.password?.message} />
         {errors.password && <p className="text-red-500 text-sm mt-2">{errors.password.message}</p>}
 
         <button disabled={isSubmitting} type="submit" className={"bg-white text-black rounded py-2 mt-5 text-lg font-semibold flex justify-center items-center"}>
