@@ -6,6 +6,7 @@ import { ERROR_TYPES } from "@/types/errors";
 import { saltAndHashPassword } from "@/utils/saltAndHashPassword";
 import { AUTH_PROVIDER } from "@prisma/client";
 import { AuthError } from "next-auth";
+import { redirect } from "next/navigation";
 
 export const registerUser = async (formData: FormData) => {
     const email = formData.get("email") as string;

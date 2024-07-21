@@ -1,4 +1,4 @@
-import { auth } from "@/auth"
+import { auth, signOut } from "@/auth"
 import Link from "next/link"
 
 const Home = async() => {
@@ -8,10 +8,15 @@ const Home = async() => {
   console.log(session)
 
   if(session){
-    return <h1 className="text-xl font-bold">Welcome {session.user?.name}</h1>
+    return <form action={async() => {
+      "use server"
+      await signOut({redirectTo: "/login"})
+    }} className="flex min-h-screen justify-center items-center flex-col">
+       <h1 className="text-3xl font-bold">Welcome {session.user.username}</h1>
+       <button type="submit" className="bg-red-500 px-5 py-2 rounded text-lg mt-5">Sign Out</button>
+    </form>
   }
 
-  
 
   return (
     <main className="flex min-h-screen justify-center items-center flex-col">

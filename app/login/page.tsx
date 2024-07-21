@@ -9,9 +9,12 @@ import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { loginUser, loginWithGithub, loginWithGoogle } from "../actions";
 import toast from "react-hot-toast"
-import { signIn } from "@/auth";
+import { useRouter } from "next/navigation";
+import { auth } from "@/auth";
 
 const RegisterPage = () => {
+  const router = useRouter()
+
   const signinSchema = z.object({
     email: z.string().trim().min(1, { message: "Email is required" }).email({ message: "Invalid emaill" }),
     password: z.string().min(1, { message: "Password is required" })
@@ -39,6 +42,7 @@ const RegisterPage = () => {
     } else {
       toast.success("User has been logging")
       reset()
+      router.push("/")
     }
   }
 
@@ -79,7 +83,7 @@ const RegisterPage = () => {
         </form>
 
 
-        <form action={async() => {
+        <form action={async () => {
           await loginWithGoogle()
         }} className="w-full">
           <button className="bg-white rounded-full flex justify-center items-center gap-2 py-2 w-full">
